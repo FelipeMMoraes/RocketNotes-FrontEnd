@@ -31,6 +31,10 @@ export function New() {
     setNewTag("")
   }
 
+  function handleRemoveTag(deleted) {
+    setTags(prevState => prevState.filter(tag => tag !== deleted));
+  }
+
   return (
     <Container>
       <Header />
@@ -44,11 +48,11 @@ export function New() {
 
           <Input 
           placeholder="Título"
-          onChange={e => setTitle(e.target.value)}
+          // onChange={e => setTitle(e.target.value)}
           />
           <Textarea
           placeholder="Observações"
-          onChange={e => setDescription(e.target.value)}
+          // onChange={e => setDescription(e.target.value)}
           />
 
           <Section title="Links Úteis">
@@ -77,7 +81,7 @@ export function New() {
                   <NoteItem 
                   key={String(index)}
                   value={tag} 
-                  onClick={() => {}}
+                  onClick={() => handleRemoveTag(tag)}
                   />
                 ))
               }
@@ -94,7 +98,6 @@ export function New() {
 
           <Button
             title="Salvar"
-            onClick={handleNewNote}
           />
         </Form>
       </main>
