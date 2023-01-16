@@ -14,6 +14,9 @@ export function New() {
   const [links, setLinks] = useState([]);
   const [newLink, setNewLink] = useState("");
 
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState("");
+
   function handleAddLink(){
     setLinks(prevState => [...prevState, newLink]);
     setNewLink("");
@@ -22,6 +25,11 @@ export function New() {
   function handleRemoveLink(deleted){
     setLinks(prevState => prevState.filter(link => link !== deleted));
   } 
+
+  function handleAddTag(){
+    setTags(prevState => [...prevState, newTag]);
+    setNewTag("")
+  }
 
   return (
     <Container>
@@ -34,8 +42,14 @@ export function New() {
             <Link to="/">Voltar</Link>
           </header>
 
-          <Input placeholder="Título" />
-          <Textarea placeholder="Observações" />
+          <Input 
+          placeholder="Título"
+          onChange={e => setTitle(e.target.value)}
+          />
+          <Textarea
+          placeholder="Observações"
+          onChange={e => setDescription(e.target.value)}
+          />
 
           <Section title="Links Úteis">
             {
@@ -58,12 +72,30 @@ export function New() {
 
           <Section title="Marcadores">
             <div className="tags">
-              <NoteItem value="react" />
-              <NoteItem isNew placeholder="Nova Tag" />
+              {
+                tags.map((tag, index) => (
+                  <NoteItem 
+                  key={String(index)}
+                  value={tag} 
+                  onClick={() => {}}
+                  />
+                ))
+              }
+
+              <NoteItem 
+              isNew
+              placeholder="Nova Tag"
+              onChange={e => setNewTag(e.target.value)}
+              value={newTag}
+              onClick={handleAddTag}
+              />
             </div>
           </Section>
 
-          <Button title="Salvar"/>
+          <Button
+            title="Salvar"
+            onClick={handleNewNote}
+          />
         </Form>
       </main>
     </Container>
