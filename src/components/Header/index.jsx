@@ -1,4 +1,4 @@
-import { useNavigation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { RiShutDownLine } from 'react-icons/ri'
 import { useAuth } from '../../hooks/auth'
 import { Container, Profile, Logout } from './styles'
@@ -8,10 +8,10 @@ import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 
 export function Header() {
   const { signOut, user } = useAuth()
-  const navigate = useNavigation()
+  const navigation = useNavigate()
 
   function handleSignOut() {
-    navigate("/")
+    navigation("/")
     signOut()
   }
 
